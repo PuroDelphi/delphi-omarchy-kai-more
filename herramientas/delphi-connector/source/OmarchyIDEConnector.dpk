@@ -1,0 +1,15 @@
+package OmarchyIDEConnector;
+{$DESCRIPTION 'Omarchy external Delphi IDE connector (MCP2Delphi)'}
+{$DESIGNONLY}
+requires rtl, vcl, designide, IndySystem, IndyCore, IndyProtocols;
+contains
+  Mcp.Attributes in 'Mcp.Attributes.pas',
+  Mcp.Types in 'Mcp.Types.pas',
+  Mcp.JsonRpc in 'Mcp.JsonRpc.pas',
+  Mcp.ToolRegistry in 'Mcp.ToolRegistry.pas',
+  Mcp.VclBridge in 'Mcp.VclBridge.pas',
+  Mcp.Server in 'Mcp.Server.pas',
+  Mcp.FormBridge in 'Mcp.FormBridge.pas',
+  Mcp.Register in 'Mcp.Register.pas',
+  Mcp.IdeBridge in 'Mcp.IdeBridge.pas';
+end.

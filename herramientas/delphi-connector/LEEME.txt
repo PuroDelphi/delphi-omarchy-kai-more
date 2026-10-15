@@ -1,0 +1,30 @@
+Consulta README.md para las instrucciones completas y los limites conocidos.
+
+Conector externo para Delphi 37.0 / IDE Win32.
+
+En PowerShell normal, con tu usuario habitual:
+powershell -NoProfile -ExecutionPolicy Bypass -File "Z:\Delphi-Connector\Instalar-Conector.ps1"
+
+Compila antes de modificar el registro. Si falla, revisar instalacion.log.
+Si compila, respalda Known Packages y registra un unico paquete con nombre propio.
+Guarda los proyectos, cierra y vuelve a abrir Delphi, y pulsa Enter en PowerShell.
+El puente comprueba tools/list y consulta ide_status sin modificar proyectos.
+Deja PowerShell abierto. Ctrl+C detiene el puente.
+
+En sesiones posteriores:
+powershell -NoProfile -ExecutionPolicy Bypass -File "Z:\Delphi-Connector\Iniciar-Conector.ps1"
+
+Desinstalar:
+powershell -NoProfile -ExecutionPolicy Bypass -File "Z:\Delphi-Connector\Desinstalar-Conector.ps1"
+
+El servidor escucha solo en localhost de Windows, requiere token y el puente
+no abre puertos de red. La carpeta compartida permite a sus usuarios enviar
+instrucciones al IDE mientras el puente este activo.
+No requiere un agente de IA en Windows ni modificar Kai.
+
+Origen MIT: https://github.com/ThomasBornhaupt/MCP2Delphi
+Revision e19680c37fba49a04311db7411147401cd018ba4.
+Se conservan los archivos originales de las unidades y LICENSE.
+Adaptacion: paquete unico de diseno, instalador, desinstalador y puente de archivos.
+El paquete compilo en Delphi 37.0 y la consulta al IDE funciono. Las funciones
+individuales dependen de la version y del estado del IDE; consulta README.md.

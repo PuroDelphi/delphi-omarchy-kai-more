@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Path
+Target = usr/bin/omarchy-windows-vm
+
+[Action]
+Description = Preserve local Windows VM shared-folder permission fix
+When = PostTransaction
+Depends = python
+Exec = /usr/local/sbin/omarchy-windows-permissions-fix

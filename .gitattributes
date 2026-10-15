@@ -1,0 +1,11 @@
+* text=auto eol=lf
+# Preserve Pascal sources byte for byte, including BOM and CRLF.
+*.pas -text whitespace=cr-at-eol
+*.dpk -text whitespace=cr-at-eol
+*.dpr text eol=crlf
+*.dproj text eol=crlf
+*.ps1 text eol=crlf
+*.res binary
+*.dcr binary
+# Upstream source formatting is preserved with its original license.
+herramientas/delphi-connector/source/Mcp.*.pas -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
