@@ -8,6 +8,7 @@ Configuración de un entorno Delphi en una máquina virtual Windows sobre Omarch
 
 | Contenido | Qué encontrarás |
 | --- | --- |
+| [Rutas actuales](documentacion/Rutas-actuales.md) | Qué proyecto abrir y qué script ejecutar después de organizar el repositorio |
 | [Guía del entorno Windows y Omarchy](documentacion/Windows-y-Omarchy.md) | Discos, almacenamiento de la VM, red, RDP y persistencia de ajustes |
 | [Manual de PAServer, SDK y conexión al IDE](documentacion/PAServer-instalacion-y-administracion.md) | Instalación, administración, errores resueltos y explicación del puente |
 | [Conector externo del IDE](herramientas/delphi-connector/README.md) | Instalar, usar y retirar MCP2Delphi con el puente de archivos |

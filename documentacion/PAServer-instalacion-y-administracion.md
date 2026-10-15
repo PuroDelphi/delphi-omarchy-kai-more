@@ -448,7 +448,7 @@ Esta instalación se comprobó con Delphi 37.0 y su IDE de 32 bits. Requiere el 
 Los archivos de la adaptación están en:
 
 ```text
-Omarchy: /home/macondo/Work/herramientas/delphi-connector
+Omarchy: /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
 Carpeta compartida: /home/macondo/Windows/Delphi-Connector
 Windows: Z:\Delphi-Connector
 ```
@@ -497,13 +497,13 @@ Después reinicia Delphi para descargarlo. El desinstalador conserva los fuentes
 Para listar las herramientas disponibles, con el puente activo:
 
 ```bash
-python /home/macondo/Work/herramientas/delphi-connector/client.py
+python /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector/client.py
 ```
 
 Para repetir la consulta de estado que comprobó la conexión:
 
 ```bash
-cd /home/macondo/Work/herramientas/delphi-connector
+cd /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
 
 python - <<'PY'
 from client import request
@@ -556,7 +556,7 @@ Mientras el puente está activo, quien pueda escribir en sus archivos compartido
 
 El proyecto [Ciudad Viva](../demos/CiudadVivaMCP/README.md) muestra cómo una aplicación propia expone sus operaciones a un cliente MCP. Es un tablero FMX con una ciudad simulada: durante una tormenta baja la generación eléctrica y hay que redistribuir la potencia disponible, manteniendo el hospital y los servicios mínimos.
 
-Los fuentes están en `~/Work/demos/CiudadVivaMCP` y su copia para Delphi en `Z:\CiudadVivaMCP`. Abre `CiudadViva.dproj` para revisar el código. Se generó un ejecutable Win32 en `Z:\CiudadVivaMCP\Win32\Debug\CiudadViva.exe`; las pruebas de ejecución y del protocolo se realizan con los botones de la aplicación o con `demo_client.py`, según el guion incluido en su README.
+Los fuentes están en `~/Work/delphi-omarchy-kai-more/demos/CiudadVivaMCP` y su copia para Delphi en `Z:\CiudadVivaMCP`. Abre `CiudadViva.dproj` para revisar el código. Se generó un ejecutable Win32 en `Z:\CiudadVivaMCP\Win32\Debug\CiudadViva.exe`; las pruebas de ejecución y del protocolo se realizan con los botones de la aplicación o con `demo_client.py`, según el guion incluido en su README.
 
 La clase `TCityTools` declara cuatro métodos con atributos `[McpTool]`: consultar el estado, cambiar el escenario, aplicar un plan y reiniciar la simulación. `TCityResources` expone `city://rules` y `TCityPrompts` proporciona el prompt `save-the-city`. El servidor registra esas clases mediante la configuración fluida de MCPConnect.
 

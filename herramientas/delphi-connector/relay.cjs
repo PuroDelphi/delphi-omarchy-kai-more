@@ -7,14 +7,19 @@ const root = __dirname;
 const discovery = path.join(process.env.LOCALAPPDATA, 'MCP2Delphi', 'Servers');
 const read = p => JSON.parse(fs.readFileSync(p, {encoding:'utf8', flag:'rs'}).replace(/^\uFEFF/, ''));
 const save = (name, value) => fs.writeFileSync(path.join(root, name), JSON.stringify(value));
-function findServer() {
-  const files = fs.readdirSync(discovery).filter(n => n.endsWith('.token.json'));
-  for (const name of files.reverse()) {
-    const s = read(path.join(discovery, name));
-    const u = new URL(s.url);
-    if (u.hostname === '127.0.0.1' && Number(u.port) >= 8776 && Number(u.port) <= 8786 && s.token) return s;
+function serverCandidates() {
+  const files = fs.readdirSync(discovery).filter(n => n.endsWith('.token.json'))
+    .map(name => ({name, modified:fs.statSync(path.join(discovery,name)).mtimeMs}))
+    .sort((a,b) => b.modified-a.modified);
+  const result=[];
+  for (const {name} of files) {
+    try {
+      const s = read(path.join(discovery, name));
+      const u = new URL(s.url);
+      if (u.hostname === '127.0.0.1' && Number(u.port) >= 8776 && Number(u.port) <= 8786 && s.token) result.push(s);
+    } catch { /* Ignore incomplete discovery files and try another candidate. */ }
   }
-  throw Error('No se encuentra el servidor del IDE. Reinicia Delphi tras instalar el paquete.');
+  return result;
 }
 function rpc(server, body) {
   const u = new URL(server.url);
@@ -27,14 +32,21 @@ function rpc(server, body) {
       res.on('end', () => {try{if(res.statusCode!==200)throw Error('HTTP '+res.statusCode);resolve(JSON.parse(result));}catch(e){reject(e);}});
       res.on('error',reject);
     });
-    req.setTimeout(180000,()=>req.destroy(Error('Tiempo de espera agotado')));
+    const timeout = body.method === 'tools/list' ? 5000 : 180000;
+    req.setTimeout(timeout,()=>req.destroy(Error('Tiempo de espera agotado')));
     req.on('error',reject);req.end(data);
   });
 }
 async function main() {
-  const server=findServer();
-  const tools=await rpc(server,{jsonrpc:'2.0',id:1,method:'tools/list',params:{}});
-  if(tools.error || !tools.result?.tools)throw Error('No se pudo enumerar las herramientas del IDE');
+  let server,tools;
+  for(const candidate of serverCandidates()) {
+    try {
+      const response=await rpc(candidate,{jsonrpc:'2.0',id:1,method:'tools/list',params:{}});
+      if(response.error || !response.result?.tools)continue;
+      server=candidate;tools=response;break;
+    } catch { /* Stale tokens from earlier IDE processes are not active connections. */ }
+  }
+  if(!server)throw Error('No se encuentra una conexion autenticada al IDE. Abre Delphi y reinicia el puente.');
   save('herramientas.json',tools);
   const statusTool=tools.result.tools.find(t=>t.name==='ide_status');
   if(statusTool)save('consulta-ide.json',await rpc(server,{jsonrpc:'2.0',id:2,method:'tools/call',params:{name:statusTool.name,arguments:{}}}));
