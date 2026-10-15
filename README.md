@@ -27,7 +27,7 @@ git clone https://github.com/PuroDelphi/delphi-omarchy-kai-more.git
 cd delphi-omarchy-kai-more
 ```
 
-La copia local usada en la conferencia está en `~/Work/delphi-omarchy-kai-more`. Las rutas `macondo`, las direcciones Docker y Studio `37.0` del manual describen el equipo de referencia; adáptalas a tu instalación.
+La copia local usada en la conferencia está en `~/Work/delphi-omarchy-kai-more`. Las rutas `usuario_del_sistema`, las direcciones Docker y Studio `37.0` del manual describen el equipo de referencia; adáptalas a tu instalación.
 
 Para llevar el ejemplo a la carpeta compartida de la VM, **la primera vez y con la carpeta de destino aún inexistente**:
 

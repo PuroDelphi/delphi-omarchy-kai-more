@@ -1,6 +1,6 @@
 # PAServer, SDK de Linux y control externo de Delphi desde Omarchy
 
-PAServer permite que Delphi, instalado en la máquina virtual Windows, despliegue y depure aplicaciones en Linux. En este equipo se ejecuta como servicio del usuario `macondo`, con contraseña y acceso desde la red interna de Docker.
+PAServer permite que Delphi, instalado en la máquina virtual Windows, despliegue y depure aplicaciones en Linux. En este equipo se ejecuta como servicio del usuario `usuario_del_sistema`, con contraseña y acceso desde la red interna de Docker.
 
 Esta guía reproduce la instalación de PAServer 37, la configuración del SDK de Linux en Delphi y los comandos para administrar el servicio. Incluye las correcciones con las que se consiguió compilar el ejemplo en este equipo. La instalación ya está realizada: para iniciar o detener PAServer, usa directamente la sección de administración. Repetir la instalación sobrescribiría la configuración y la contraseña.
 
@@ -12,7 +12,7 @@ Omarchy está basado en Arch Linux. Esta preparación adapta sus rutas de biblio
 
 | Elemento | Valor |
 | --- | --- |
-| Usuario de Omarchy | `macondo` |
+| Usuario de Omarchy | `usuario_del_sistema` |
 | Origen descargado | `~/Downloads/PAServer/LinuxPAServer37.0/PAServer-37.0` |
 | Instalación | `~/.local/share/paserver/37.0` |
 | Configuración privada | `~/.config/paserver/paserver.config` |
@@ -20,7 +20,7 @@ Omarchy está basado en Arch Linux. Esta preparación adapta sus rutas de biblio
 | Servicio de usuario | `paserver.service` |
 | Dirección para Delphi en Windows | `172.18.0.1` |
 | Puerto TCP | `64211` |
-| SDK local en Windows | `C:\Users\macondo\Documents\Embarcadero\Studio\SDKs\omarchy4.0.4.sdk` |
+| SDK local en Windows | `C:\Users\usuario_del_sistema\Documents\Embarcadero\Studio\SDKs\omarchy4.0.4.sdk` |
 | Bibliotecas de GCC en este equipo | `/usr/lib/gcc/x86_64-pc-linux-gnu/16` |
 
 Los ejemplos usan Bash, Python 3 y systemd. Ejecuta los pasos de instalación desde una terminal de tu sesión de Omarchy, sin `sudo`, salvo los comandos indicados para el firewall y el enlace de biblioteca.
@@ -256,7 +256,7 @@ Actualizar la caché solo copia los archivos de las rutas y máscaras configurad
 En este equipo la raíz del SDK es:
 
 ```text
-C:\Users\macondo\Documents\Embarcadero\Studio\SDKs\omarchy4.0.4.sdk
+C:\Users\usuario_del_sistema\Documents\Embarcadero\Studio\SDKs\omarchy4.0.4.sdk
 ```
 
 Desde PowerShell puedes comprobar los archivos principales:
@@ -448,8 +448,8 @@ Esta instalación se comprobó con Delphi 37.0 y su IDE de 32 bits. Requiere el 
 Los archivos de la adaptación están en:
 
 ```text
-Omarchy: /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
-Carpeta compartida: /home/macondo/Windows/Delphi-Connector
+Omarchy: /home/usuario_del_sistema/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
+Carpeta compartida: /home/usuario_del_sistema/Windows/Delphi-Connector
 Windows: Z:\Delphi-Connector
 ```
 
@@ -497,13 +497,13 @@ Después reinicia Delphi para descargarlo. El desinstalador conserva los fuentes
 Para listar las herramientas disponibles, con el puente activo:
 
 ```bash
-python /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector/client.py
+python /home/usuario_del_sistema/Work/delphi-omarchy-kai-more/herramientas/delphi-connector/client.py
 ```
 
 Para repetir la consulta de estado que comprobó la conexión:
 
 ```bash
-cd /home/macondo/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
+cd /home/usuario_del_sistema/Work/delphi-omarchy-kai-more/herramientas/delphi-connector
 
 python - <<'PY'
 from client import request
