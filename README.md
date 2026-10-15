@@ -13,7 +13,6 @@ Configuración de un entorno Delphi en una máquina virtual Windows sobre Omarch
 | [Manual de PAServer, SDK y conexión al IDE](documentacion/PAServer-instalacion-y-administracion.md) | Instalación, administración, errores resueltos y explicación del puente |
 | [Conector externo del IDE](herramientas/delphi-connector/README.md) | Instalar, usar y retirar MCP2Delphi con el puente de archivos |
 | [Ciudad Viva con MCPConnect](demos/CiudadVivaMCP/README.md) | Ejemplo FMX, herramientas, recurso, prompt y guion de conferencia |
-| [Hola mundo con FMX](demos/HolaMundoFMX/README.md) | Segundo proyecto: un botón que muestra «Hola mundo», con formulario editable |
 | [PAServer para systemd](herramientas/paserver/README.md) | Lanzador y plantilla del servicio de usuario |
 | [Ajustes del lanzador de Windows](herramientas/omarchy/README.md) | Parche acotado de permisos y RDP, con hook de Pacman |
 | [Validación y pendientes](documentacion/Estado-y-validacion.md) | Qué se comprobó y qué necesita revisión al reproducirlo |
